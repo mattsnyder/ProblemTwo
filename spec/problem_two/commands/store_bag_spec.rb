@@ -37,12 +37,39 @@ describe "storing a bag in the locker room" do
 end
 
 describe "retrieving a bag" do
-  context "with a small bag" do
+  context "from a small locker" do
     Given { ProblemTwo::LockerRoom.define 0, 0, 0 }
     Given (:ticket) { ProblemTwo::Ticket.new "12345", "S1", mock("service") }
-    Given { ticket.should_receive(:invalidate).once }
+    Given { ticket.should_receive(:invalidate).and_return true }
     When (:result) { ProblemTwo::LockerRoom.retrieve ticket }
     Then { result.should be_true }
+    Then { ProblemTwo::LockerRoom.fits?("small").should be_true }
+  end
+
+  context "from a medium locker" do
+    Given { ProblemTwo::LockerRoom.define 0, 0, 0 }
+    Given (:ticket) { ProblemTwo::Ticket.new "12345", "M5", mock("service") }
+    Given { ticket.should_receive(:invalidate).and_return true }
+    When (:result) { ProblemTwo::LockerRoom.retrieve ticket }
+    Then { result.should be_true }
+    Then { ProblemTwo::LockerRoom.fits?("medium").should be_true }
+  end
+
+   context "from a large locker" do
+    Given { ProblemTwo::LockerRoom.define 0, 0, 0 }
+    Given (:ticket) { ProblemTwo::Ticket.new "12345", "L2", mock("service") }
+    Given { ticket.should_receive(:invalidate).and_return true }
+    When (:result) { ProblemTwo::LockerRoom.retrieve ticket }
+    Then { result.should be_true }
+    Then { ProblemTwo::LockerRoom.fits?("large").should be_true }
+  end
+
+  context "from an invalid locker location" do
+    Given { ProblemTwo::LockerRoom.define 0, 0, 0 }
+    Given (:ticket) { ProblemTwo::Ticket.new "12345", "X2", mock("service") }
+    Given { ticket.should_not_receive(:invalidate) }
+    When (:result) { ProblemTwo::LockerRoom.retrieve ticket }
+    Then { result.should be_false }
   end
 end
 
