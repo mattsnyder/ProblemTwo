@@ -13,7 +13,7 @@ module ProblemTwo
     end
 
     def to_s
-      "LOCKER TICKET NUMBER: #{@number}"
+      "TICKET NUMBER: #{@number}"
     end
   end
 end

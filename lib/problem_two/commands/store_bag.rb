@@ -10,7 +10,10 @@ module ProblemTwo
 
       def execute
         location = LockerRoom.store @size
-        TicketService.create location
+        return {
+          "LOCKER LOCATION" => location,
+          "TICKET" => TicketService.create(location)
+        }
       end
     end
   end

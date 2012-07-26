@@ -14,7 +14,7 @@ module ProblemTwo
 
     class NullCommand
       def execute
-        "Nothing occured. The command input was not valid."
+        "Nothing occured. The command input was not valid or no room available."
       end
     end
   end
