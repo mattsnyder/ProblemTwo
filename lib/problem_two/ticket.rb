@@ -7,5 +7,9 @@ module ProblemTwo
       @location = location
       @provider = provider
     end
+
+    def to_s
+      "LOCKER TICKET NUMBER: #{@number}"
+    end
   end
 end
