@@ -7,7 +7,7 @@ module ProblemTwo
     def self.valid?(number)
       @@tickets.has_key?(number)
     end
-    
+
     def self.create(locker_location)
       number = generate_number locker_location
       @@tickets[number] = locker_location

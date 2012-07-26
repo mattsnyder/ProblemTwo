@@ -4,7 +4,7 @@ require 'rspec/given'
 require './lib/problem_two/command_adapter'
 
 describe "converting strings to commands" do
-  Given (:string) { "".extend ProblemTwo::CommandAdapter }
+  Given (:string) { "small".extend ProblemTwo::CommandAdapter }
 
   context "without a ticket number or bag size" do
     When (:command) { string.to_command }
