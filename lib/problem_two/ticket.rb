@@ -8,6 +8,10 @@ module ProblemTwo
       @provider = provider
     end
 
+    def invalidate
+      provider.delete(self)
+    end
+
     def to_s
       "LOCKER TICKET NUMBER: #{@number}"
     end

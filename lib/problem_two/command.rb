@@ -13,6 +13,9 @@ module ProblemTwo
     end
 
     class NullCommand
+      def execute
+        "Nothing occured. The command input was not valid."
+      end
     end
   end
 end
