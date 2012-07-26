@@ -6,23 +6,38 @@ module ProblemTwo
       "large" => [2]
     }
 
-    @@available = [0,0,0]
+    @@available = [[],[],[]]
+
 
     def self.define(small, medium, large)
-      @@available = [small, medium, large]
+      @@available = [
+                     Array.new(small){|i| "S#{i}"},
+                     Array.new(medium){|i| "M#{i}"},
+                     Array.new(large){|i| "L#{i}"}
+                    ]
     end
 
     def self.fits?(size)
       return false unless @@size_availability_rules.has_key? size
-      @@size_availability_rules[size].each do |availability_index|
-        fits = @@available[availability_index] > 0
-        return true if fits
-      end
-      false
+      return locker_size_available?(size) > -1
     end
 
-    def self.retrieve(location)
+    def self.store(size)
+      @@available[locker_size_available?(size)].shift
     end
+
+    def self.retrieve(ticket)
+      ticket.invalidate
+      true
+    end
+
+    def self.locker_size_available?(size)
+      @@size_availability_rules[size].each do |availability_index|
+        return availability_index if @@available[availability_index].size > 0
+      end
+      -1
+    end
+    private_class_method :locker_size_available?
 
     private_class_method :new
   end
