@@ -9,7 +9,7 @@ class ConciergeDesk
   end
   def run
     loop do
-      print "Enter a ticket number, bag size, or type ? to see bag sizes:"
+      print "Enter a ticket number or bag size (small, medium, large):"
       input = gets.chomp
       puts ProblemTwo::Command.parse(input).execute
     end
