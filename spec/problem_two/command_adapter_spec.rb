@@ -6,7 +6,7 @@ require './lib/problem_two/command_adapter'
 describe "converting strings to commands" do
   Given (:string) { "".extend ProblemTwo::CommandAdapter }
 
-  context "with not a ticket number or bag size" do
+  context "without a ticket number or bag size" do
     When (:command) { string.to_command }
     Then { command.should == ProblemTwo::Command.null }
   end
