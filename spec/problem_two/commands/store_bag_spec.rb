@@ -8,5 +8,5 @@ describe "storing a bag" do
   Given { ProblemTwo::LockerRoom.should_receive(:store).with("asize").and_return("alocation")  }
   Given { ProblemTwo::TicketService.should_receive(:create).with("alocation").and_return ticket }
   When (:result) { ProblemTwo::Commands::StoreBag.new("asize").execute }
-  Then { result.should == ticket }
+  Then { result.should == {"LOCKER LOCATION" => "alocation", "TICKET" => ticket} }
 end
